@@ -14,7 +14,7 @@ debug("STEP 1 - PHP is running<br>");
 session_start();
 debug( "STEP 2 - Session started<br>");
 require "db.php";
-debug( "STEP 3 - Database loaded<br>";
+debug( "STEP 3 - Database loaded<br>");
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo "STEP 4 - Not a POST request";
     exit();
@@ -50,4 +50,5 @@ $_SESSION["user_id"] = $user["id"];
 $_SESSION["username"] = $user["username"];
 debug( "STEP 13 - Session variables created<br>");
 debug( "<br><strong>STEP 14 - LOGIN SUCCESSFUL</strong>");
+header("Location: dashboard.php");
 exit(); ?>
