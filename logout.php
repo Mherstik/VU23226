@@ -1,1 +1,1 @@
-<?php session_start(); $_SESSION = []; session_destroy(); header("Location: index.html"); exit; ?>
+<?php session_start(); // Remove all session variables $_SESSION = []; // Destroy the session session_destroy(); // Return to the login page header("Location: index.html"); exit; ?>

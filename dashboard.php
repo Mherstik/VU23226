@@ -1,4 +1,4 @@
-<?php session_start(); if (!isset($_SESSION["user_id"])) { header("Location: index.html"); exit; } $username = htmlspecialchars($_SESSION["username"]); ?> <!DOCTYPE html> <html lang="en"> <head>
+<?php session_start(); // Make sure the user is logged in if (!isset($_SESSION["user_id"])) { header("Location: index.html"); exit; } $username = htmlspecialchars( $_SESSION["username"], ENT_QUOTES, "UTF-8" ); ?> <!DOCTYPE html> <html lang="en"> <head>
 <meta charset="UTF-8">
 
 <meta
@@ -33,10 +33,12 @@
         color: white;
         text-decoration: none;
         font-weight: 600;
+        transition: 0.2s;
     }
 
     .logout-button:hover {
         background: #5568d8;
+        transform: translateY(-2px);
     }
 
 </style>
