@@ -6,7 +6,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Dashboard</title>
+<title>Dashboard Page</title>
 
 <link rel="stylesheet" href="style.css">
 
