@@ -1,0 +1,299 @@
+
+.   {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+html,
+body {
+width: 100%;
+min-height: 100%;
+}
+
+body {
+min-height: 100vh;
+
+font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+background:
+    linear-gradient(
+        135deg,
+        #667eea 0%,
+        #764ba2 100%
+    );
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 20px;
+
+}
+
+/* Login container */
+
+.login-container {
+width: 100%;
+display: flex;
+justify-content: center;
+}
+
+/* Login card */
+
+.login-card {
+width: 100%;
+max-width: 420px;
+
+background: #ffffff;
+
+padding: 40px;
+
+border-radius: 20px;
+
+box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.20);
+
+}
+
+/* Heading */
+
+.login-card h1 {
+text-align: center;
+
+color: #222222;
+
+font-size: 30px;
+
+margin-bottom: 8px;
+
+}
+
+/* Subtitle */
+
+.subtitle {
+text-align: center;
+
+color: #777777;
+
+font-size: 15px;
+
+margin-bottom: 30px;
+
+}
+
+/* Form */
+
+.form-group {
+margin-bottom: 20px;
+}
+
+/* Labels */
+
+.form-group label {
+display: block;
+
+color: #333333;
+
+font-size: 14px;
+
+font-weight: 600;
+
+margin-bottom: 8px;
+
+}
+
+/* Text inputs */
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+display: block;
+
+width: 100%;
+
+height: 48px;
+
+padding: 0 15px;
+
+border: 1px solid #dddddd;
+
+border-radius: 10px;
+
+background: #ffffff;
+
+color: #222222;
+
+font-size: 15px;
+
+outline: none;
+
+transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+/* Input focus */
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+border-color: #667eea;
+
+box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.15);
+
+}
+
+/* Placeholder */
+
+.form-group input::placeholder {
+color: #aaaaaa;
+}
+
+/* Remember / forgot password */
+
+.form-options {
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+margin-top: 5px;
+
+margin-bottom: 25px;
+
+font-size: 13px;
+
+}
+
+/* Remember checkbox */
+
+.remember {
+display: flex;
+
+align-items: center;
+
+gap: 7px;
+
+color: #666666;
+
+cursor: pointer;
+
+}
+
+.remember input {
+width: 15px;
+height: 15px;
+
+cursor: pointer;
+
+}
+
+/* Links */
+
+.form-options a,
+.register-link a {
+color: #667eea;
+
+text-decoration: none;
+
+font-weight: 600;
+
+}
+
+.form-options a:hover,
+.register-link a:hover {
+text-decoration: underline;
+}
+
+/* Sign in button */
+
+button[type="submit"] {
+display: block;
+
+width: 100%;
+
+height: 50px;
+
+border: none;
+
+border-radius: 10px;
+
+background:
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+color: #ffffff;
+
+font-size: 16px;
+
+font-weight: 600;
+
+cursor: pointer;
+
+transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+
+}
+
+/* Button hover */
+
+button[type="submit"]:hover {
+transform: translateY(-2px);
+
+box-shadow:
+    0 8px 20px rgba(102, 126, 234, 0.35);
+
+}
+
+/* Button click */
+
+button[type="submit"]:active {
+transform: translateY(0);
+}
+
+/* Registration text */
+
+.register-link {
+text-align: center;
+
+color: #777777;
+
+font-size: 14px;
+
+margin-top: 25px;
+
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+body {
+    padding: 15px;
+}
+
+.login-card {
+    padding: 30px 25px;
+
+    border-radius: 16px;
+}
+
+.login-card h1 {
+    font-size: 26px;
+}
+
+.form-options {
+    font-size: 12px;
+}
+
+}

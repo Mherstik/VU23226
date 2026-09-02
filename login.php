@@ -1,0 +1,5 @@
+<?php 
+session_start(); 
+require "db.php"; 
+if ($_SERVER["REQUEST_METHOD"] !== "POST") { header("Location: index.html"); exit; } $username = trim($_POST["username"] ?? ""); $password = $_POST["password"] ?? ""; if ($username === "" || $password === "") { die("Please enter your username and password."); } // Find the user using a prepared statement $stmt = $pdo->prepare( "SELECT id, username, password_hash FROM users WHERE username = ? LIMIT 1" ); $stmt->execute([$username]); $user = $stmt->fetch(); if ($user && password_verify($password, $user["password_hash"])) { // Login successful session_regenerate_id(true); $_SESSION["user_id"] = $user["id"]; $_SESSION["username"] = $user["username"]; header("Location: dashboard.php"); exit; } else { // Don't reveal whether the username exists die("Invalid username or password."); } 
+?>
