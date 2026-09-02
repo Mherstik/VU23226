@@ -1,54 +1,81 @@
 <?php error_reporting(E_ALL);
+ini_set("display_errors", "1");
 $debug = false;
-
-function debug($message) {
+/* |-------------------------------------------------------------------------- | Debug Function |-------------------------------------------------------------------------- */ function debug(
+    $message
+) {
     global $debug;
-
     if ($debug) {
         echo $message . "<br>";
     }
 }
-
-ini_set("display_errors", "1");
-debug("STEP 1 - PHP is running<br>");
+/* |-------------------------------------------------------------------------- | Start Session |-------------------------------------------------------------------------- */ debug(
+    "STEP 1 - PHP is running"
+);
 session_start();
-debug( "STEP 2 - Session started<br>");
-require "db.php";
-debug( "STEP 3 - Database loaded<br>");
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo "STEP 4 - Not a POST request";
+debug("STEP 2 - Session started");
+/* |-------------------------------------------------------------------------- | Database Connection |-------------------------------------------------------------------------- */ require "db.php";
+debug("STEP 3 - Database loaded");
+/* |-------------------------------------------------------------------------- | Make Sure This Is A POST Request |-------------------------------------------------------------------------- */ if (
+    $_SERVER["REQUEST_METHOD"] !== "POST"
+) {
+    if ($debug) {
+        echo "STEP 4 - Not a POST request<br>";
+    }
     exit();
 }
-debug( "STEP 4 - POST request received<br>");
-$username = trim($_POST["username"] ?? "");
+debug("STEP 4 - POST request received");
+/* |-------------------------------------------------------------------------- | Get Form Data |-------------------------------------------------------------------------- */ $username = trim(
+    $_POST["username"] ?? ""
+);
 $password = $_POST["password"] ?? "";
-debug( "STEP 5 - Form data received<br>");
-debug( "Username: " . htmlspecialchars($username) . "<br>");
-if ($username === "" || $password === "") {
-    die("STEP 6 - Missing username or password");
+debug("STEP 5 - Form data received");
+debug("Username: " . htmlspecialchars($username, ENT_QUOTES, "UTF-8"));
+/* |-------------------------------------------------------------------------- | Validate Form Data |-------------------------------------------------------------------------- */ if (
+    $username === "" ||
+    $password === ""
+) {
+    if ($debug) {
+        die("STEP 6 - Missing username or password");
+    }
+    die("Please enter your username and password.");
 }
-debug( "STEP 6 - Username and password present<br>");
-$stmt = $pdo->prepare(
+debug("STEP 6 - Username and password present");
+/* |-------------------------------------------------------------------------- | Look Up User |-------------------------------------------------------------------------- */ $stmt = $pdo->prepare(
     "SELECT id, username, password_hash FROM users WHERE username = ? LIMIT 1"
 );
-debug( "STEP 7 - SQL prepared<br>");
+debug("STEP 7 - SQL prepared");
 $stmt->execute([$username]);
-debug( "STEP 8 - SQL executed<br>");
+debug("STEP 8 - SQL executed");
 $user = $stmt->fetch();
-debug( "STEP 9 - User lookup complete<br>");
-if (!$user) {
-    die("STEP 10 - User not found");
+debug("STEP 9 - User lookup complete");
+/* |-------------------------------------------------------------------------- | Check User Exists |-------------------------------------------------------------------------- */ if (
+    !$user
+) {
+    if ($debug) {
+        die("STEP 10 - User not found");
+    }
+    die("Incorrect username or password.");
 }
-debug( "STEP 10 - User found<br>");
-if (!password_verify($password, $user["password_hash"])) {
-    die("STEP 11 - Password verification failed");
+debug("STEP 10 - User found");
+/* |-------------------------------------------------------------------------- | Verify Password |-------------------------------------------------------------------------- */ if (
+    !password_verify($password, $user["password_hash"])
+) {
+    if ($debug) {
+        die("STEP 11 - Password verification failed");
+    }
+    die("Incorrect username or password.");
 }
-debug( "STEP 11 - Password verified<br>");
-session_regenerate_id(true);
-debug( "STEP 12 - Session regenerated<br>");
+debug("STEP 11 - Password verified");
+/* |-------------------------------------------------------------------------- | Create Session |-------------------------------------------------------------------------- */ session_regenerate_id(
+    true
+);
+debug("STEP 12 - Session regenerated");
 $_SESSION["user_id"] = $user["id"];
 $_SESSION["username"] = $user["username"];
-debug( "STEP 13 - Session variables created<br>");
-debug( "<br><strong>STEP 14 - LOGIN SUCCESSFUL</strong>");
-header("Location: dashboard.php");
+debug("STEP 13 - Session variables created");
+debug("<strong>STEP 14 - LOGIN SUCCESSFUL</strong>");
+/* |-------------------------------------------------------------------------- | Login Successful |-------------------------------------------------------------------------- */ header(
+    "Location: dashboard.php"
+);
 exit(); ?>
