@@ -1,8 +1,8 @@
 <?php 
 $host = "localhost"; 
 $dbname = "login_system"; 
-$dbuser = "root"; 
-$dbpass = ""; 
+$dbuser = "login_app"; 
+$dbpass = "strongpass"; 
 try { 
 	$pdo = new PDO( "mysql:host=$host;dbname=$dbname;charset=utf8mb4", 
 	$dbuser, 
