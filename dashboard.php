@@ -1,4 +1,4 @@
-<?php session_start(); // Make sure the user is logged in if (!isset($_SESSION["user_id"])) { header("Location: index.html"); exit; } $username = htmlspecialchars( $_SESSION["username"], ENT_QUOTES, "UTF-8" ); ?> <!DOCTYPE html> <html lang="en"> <head>
+<?php session_start(); // Make sure the user is logged in if (!isset($_SESSION["user_id"])) { header("Location: index.html"); exit(); } // Get the logged-in user's information $userId = $_SESSION["user_id"]; $username = $_SESSION["username"] ?? "Unknown User"; // Safely display the username $username = htmlspecialchars( $username, ENT_QUOTES, "UTF-8" ); ?> <!DOCTYPE html> <html lang="en"> <head>
 <meta charset="UTF-8">
 
 <meta
@@ -27,17 +27,27 @@
 
     .logout-button {
         display: inline-block;
+
         padding: 12px 25px;
+
         border-radius: 10px;
+
         background: #667eea;
+
         color: white;
+
         text-decoration: none;
+
         font-weight: 600;
-        transition: 0.2s;
+
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
     }
 
     .logout-button:hover {
         background: #5568d8;
+
         transform: translateY(-2px);
     }
 
@@ -48,11 +58,18 @@
 
     <div class="login-card dashboard-card">
 
-        <h1>Welcome!</h1>
+        <h1>
+            Welcome!
+        </h1>
 
         <p class="welcome">
+
             You are logged in as
-            <strong><?php echo $username; ?></strong>.
+
+            <strong>
+                <?php echo $username; ?>
+            </strong>
+
         </p>
 
         <a
